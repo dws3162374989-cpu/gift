@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff6ec">
+  <title>方景源小朋友的快乐入口</title>
+  <link rel="preload" href="assets/fang-jingyuan-photo.jpg" as="image">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="gift">
+    <section class="hero" aria-label="礼物首页">
+      <div class="photo-stage">
+        <img src="assets/fang-jingyuan-photo.jpg" alt="方景源比耶照片" class="portrait" data-content="photo">
+        <div class="stamp" aria-hidden="true">
+          <span>FJY</span>
+          <strong>NFC</strong>
+        </div>
+      </div>
+
+      <div class="message">
+        <p class="eyebrow">Tap opened</p>
+        <h1 data-content="title">方景源小朋友，抓到你啦</h1>
+        <p class="lead" data-content="subtitle">
+          这张卡片的隐藏功能：在你不开心、想笑、或者单纯想被宠一下的时候，
+          自动打开一份专属快乐。
+        </p>
+        <div class="actions" aria-label="互动按钮">
+          <button class="primary" type="button" data-open-letter>打开今日份宠溺</button>
+          <button class="ghost" type="button" data-confetti>投喂一点快乐</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="专属声明">
+      <span>本卡持有人：方景源</span>
+      <span>权限：无限被偏爱</span>
+      <span>有效期：一直有效</span>
+    </section>
+
+    <section class="letter" id="letter" aria-label="礼物留言">
+      <p class="kicker">今日留言</p>
+      <h2 data-content="letterTitle">请这位戴眼镜比耶选手查收</h2>
+      <p data-content="letterBody">
+        你负责可爱，我负责记得。以后这张 NFC 卡片里可以继续放新的照片、新的话、
+        新的小惊喜。网址不用换，快乐可以持续更新。
+      </p>
+      <p class="signature">- 来自你的专属快乐管理员</p>
+    </section>
+  </main>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>

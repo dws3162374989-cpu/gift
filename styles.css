@@ -1,0 +1,271 @@
+:root {
+  --ink: #251b16;
+  --muted: #6f5e55;
+  --paper: #fffaf4;
+  --cream: #fff0df;
+  --peach: #ffb38b;
+  --rose: #e85d75;
+  --mint: #6eb6a6;
+  --shadow: 0 24px 70px rgb(61 35 22 / 18%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 12%, rgb(255 255 255 / 78%) 0 13%, transparent 14%),
+    linear-gradient(135deg, #fff9f0 0%, #ffe5d1 42%, #f5fff8 100%);
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.gift {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: clamp(18px, 4vw, 48px);
+}
+
+.hero {
+  min-height: calc(100vh - 96px);
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(290px, 0.8fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.photo-stage {
+  position: relative;
+  width: min(100%, 590px);
+  justify-self: center;
+  padding: clamp(10px, 2vw, 18px);
+  transform: rotate(-1.5deg);
+  background: #fff;
+  border: 2px solid rgb(37 27 22 / 90%);
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+}
+
+.photo-stage::before,
+.photo-stage::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 78px;
+  height: 30px;
+  background: rgb(255 255 255 / 72%);
+  border: 1px solid rgb(37 27 22 / 18%);
+  transform: rotate(-9deg);
+}
+
+.photo-stage::before {
+  left: 36px;
+  top: -15px;
+}
+
+.photo-stage::after {
+  right: 36px;
+  bottom: -15px;
+  transform: rotate(7deg);
+}
+
+.portrait {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 52% 42%;
+  border-radius: 18px;
+  filter: saturate(1.02) contrast(1.03);
+}
+
+.stamp {
+  position: absolute;
+  right: clamp(20px, 4vw, 38px);
+  bottom: clamp(20px, 4vw, 38px);
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--rose);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 12px 28px rgb(37 27 22 / 22%);
+  transform: rotate(9deg);
+}
+
+.stamp span,
+.stamp strong {
+  grid-area: 1 / 1;
+}
+
+.stamp span {
+  margin-top: -20px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.stamp strong {
+  margin-top: 28px;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.message {
+  padding-block: 28px;
+}
+
+.eyebrow,
+.kicker {
+  margin: 0 0 12px;
+  color: var(--rose);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 10em;
+  margin-bottom: 18px;
+  font-size: clamp(38px, 7vw, 76px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.lead {
+  max-width: 29em;
+  color: var(--muted);
+  font-size: clamp(17px, 2.4vw, 21px);
+  line-height: 1.85;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.primary,
+.ghost {
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.primary {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 14px 30px rgb(37 27 22 / 20%);
+}
+
+.ghost {
+  color: var(--ink);
+  background: rgb(255 255 255 / 54%);
+}
+
+.primary:active,
+.ghost:active {
+  transform: translateY(2px);
+}
+
+.ticker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 16px 0 26px;
+  color: #fff;
+}
+
+.ticker span {
+  min-height: 52px;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  background: var(--ink);
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 800;
+}
+
+.letter {
+  margin-bottom: 36px;
+  padding: clamp(22px, 4vw, 42px);
+  background: rgb(255 255 255 / 58%);
+  border: 2px solid rgb(37 27 22 / 82%);
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgb(61 35 22 / 10%);
+}
+
+.letter h2 {
+  margin-bottom: 14px;
+  font-size: clamp(26px, 4vw, 42px);
+  letter-spacing: 0;
+}
+
+.letter p {
+  max-width: 48em;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+.signature {
+  margin-bottom: 0;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .gift {
+    padding: 18px;
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    padding-top: 10px;
+  }
+
+  .message {
+    padding-block: 4px 18px;
+  }
+
+  h1 {
+    max-width: 8em;
+  }
+
+  .ticker {
+    grid-template-columns: 1fr;
+  }
+
+  .primary,
+  .ghost {
+    width: 100%;
+  }
+}
