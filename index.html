@@ -3,78 +3,64 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff3ed">
+  <meta name="theme-color" content="#fff1ec">
   <title>方景源小朋友的快乐相册</title>
-  <link rel="preload" href="assets/gallery-1.jpg" as="image">
+  <link rel="preload" href="assets/gallery/photo-01.jpg" as="image">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app">
     <section class="hero" aria-label="NFC 礼物相册">
-      <div class="copy">
+      <div class="intro">
         <p class="eyebrow">Tap opened</p>
-        <h1>方景源小朋友的专属快乐相册</h1>
-        <p class="lead">三张照片，三份宠溺。请按顺序翻阅，随机掉落小惊喜。</p>
+        <h1>方景源小朋友的快乐放映厅</h1>
+        <p class="lead">把喜欢藏进每一张照片里。点开 NFC 的时候，就像打开一整盒甜甜的小回忆。</p>
 
         <div class="toolbar" aria-label="互动按钮">
           <button type="button" class="pill primary" data-next>下一张</button>
-          <button type="button" class="pill" data-sweet>今日甜话</button>
+          <button type="button" class="pill" data-autoplay>自动播放</button>
           <button type="button" class="pill" data-music>开启音乐</button>
+          <button type="button" class="pill" data-sweet>今日甜话</button>
         </div>
       </div>
 
-      <section class="album" aria-label="照片翻页相册">
-        <button type="button" class="nav prev" data-prev aria-label="上一张">‹</button>
-        <div class="viewer">
-          <article class="slide is-active">
-            <img src="assets/gallery-1.jpg" alt="方景源自拍比耶">
-            <div class="caption">
-              <span>01</span>
-              <strong>比耶选手出场</strong>
-              <p>可爱值已超标，请立刻获得一份偏爱。</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/gallery-2.jpg" alt="毕业照送花瞬间">
-            <div class="caption">
-              <span>02</span>
-              <strong>花花投喂现场</strong>
-              <p>被指到的人，负责一直喜欢她。</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/gallery-3.jpg" alt="毕业合照自拍">
-            <div class="caption">
-              <span>03</span>
-              <strong>合照认证成功</strong>
-              <p>今日结论：方景源很好看，我们很般配。</p>
-            </div>
-          </article>
+      <section class="album" aria-label="照片相册">
+        <div class="viewer" data-viewer>
+          <button type="button" class="nav prev" data-prev aria-label="上一张">‹</button>
+          <figure class="photo-card" data-card>
+            <img data-photo src="assets/gallery/photo-01.jpg" alt="相册照片">
+            <figcaption>
+              <span data-index>01 / 27</span>
+              <strong data-title>快乐载入中</strong>
+              <p data-caption>请稍等，正在准备今天的宠溺。</p>
+            </figcaption>
+          </figure>
+          <button type="button" class="nav next" data-next aria-label="下一张">›</button>
         </div>
-        <button type="button" class="nav next" data-next aria-label="下一张">›</button>
+
+        <div class="progress" aria-label="照片进度">
+          <div class="progress-bar" data-progress></div>
+        </div>
+
+        <div class="filmstrip" data-thumbs aria-label="照片缩略图"></div>
       </section>
-
-      <div class="dots" aria-label="照片页码">
-        <button type="button" class="dot is-active" data-go="0" aria-label="第 1 张"></button>
-        <button type="button" class="dot" data-go="1" aria-label="第 2 张"></button>
-        <button type="button" class="dot" data-go="2" aria-label="第 3 张"></button>
-      </div>
     </section>
 
-    <section class="note" aria-label="礼物留言">
+    <section class="note" aria-label="隐藏留言">
       <p class="eyebrow">Hidden note</p>
-      <h2>这张 NFC 卡的隐藏规则</h2>
-      <p>不开心的时候点开，想我了也点开。每次更新照片和留言，这个网址都不用换。</p>
+      <h2>本相册使用说明</h2>
+      <p>如果今天很开心，就多看几张；如果今天有点累，就打开音乐，让我隔着这张卡片陪你一小会儿。</p>
       <div class="badges">
-        <span>持有人：方景源</span>
-        <span>有效期：一直</span>
-        <span>权限：无限被宠</span>
+        <span>照片：27 张</span>
+        <span>模式：无限宠溺</span>
+        <span>音乐：循环播放</span>
       </div>
     </section>
   </main>
 
   <div class="toast" data-toast role="status" aria-live="polite"></div>
   <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="gallery-data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
