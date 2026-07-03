@@ -1,4 +1,32 @@
-const galleryItems = window.galleryItems || [];
+const galleryItems = [
+  { src: "assets/gallery/photo-01.jpg", title: "小心心发射", caption: "近距离小心心已经送达，今日份可爱直接贴脸暴击。" },
+  { src: "assets/gallery/photo-02.jpg", title: "窗边比耶", caption: "车窗外的风景飞快后退，镜头里的比耶小朋友稳稳可爱。" },
+  { src: "assets/gallery/photo-03.jpg", title: "地铁贴贴", caption: "车厢里的近距离合照，认真看镜头的样子很适合被收藏。" },
+  { src: "assets/gallery/photo-04.jpg", title: "视频亲亲", caption: "手机里和现实里同步卖萌，幼稚得刚刚好，也甜得刚刚好。" },
+  { src: "assets/gallery/photo-05.jpg", title: "毕业认证", caption: "校名、学士服和并肩合照一起出现，这一天当然要郑重保存。" },
+  { src: "assets/gallery/photo-06.jpg", title: "双人补水站", caption: "两瓶水挡在前面，但挡不住这张照片里的陪伴感。" },
+  { src: "assets/gallery/photo-07.jpg", title: "候车小片段", caption: "大厅里的等待时间，因为这张贴近镜头的合照变得很有纪念感。" },
+  { src: "assets/gallery/photo-08.jpg", title: "红柱小憩", caption: "红色柱子、木椅和阳光都很暖，但最亮眼的还是你。" },
+  { src: "assets/gallery/photo-09.jpg", title: "夜色比耶", caption: "路灯亮起来的时候，比耶手势也刚好把夜晚变得可爱。" },
+  { src: "assets/gallery/photo-10.jpg", title: "花束公主", caption: "黑裙和蓝紫花束刚好相配，像把温柔认真地捧在手里。" },
+  { src: "assets/gallery/photo-11.jpg", title: "小站台", caption: "坐在银色座椅边认真看手机，连等车的瞬间都很有画面感。" },
+  { src: "assets/gallery/photo-12.jpg", title: "比耶小黄裙", caption: "黄色裙子和比耶手势一起出现，甜度直接调到满格。" },
+  { src: "assets/gallery/photo-13.jpg", title: "城墙快乐", caption: "在城墙边举高手的那一刻，快乐很明显，喜欢也很明显。" },
+  { src: "assets/gallery/photo-14.jpg", title: "比耶选手", caption: "戴眼镜比耶选手再次上线，表情乖到必须立刻夸夸。" },
+  { src: "assets/gallery/photo-15.jpg", title: "毕业合照", caption: "花束在中间，你们站在一起，这张毕业照认真又可爱。" },
+  { src: "assets/gallery/photo-16.jpg", title: "地铁小惊喜", caption: "车厢里的随手自拍，把普通路程变成了只有你们知道的小片段。" },
+  { src: "assets/gallery/photo-17.jpg", title: "花墙前", caption: "花墙在后面开得热闹，你在前面看起来温柔又清亮。" },
+  { src: "assets/gallery/photo-18.jpg", title: "戴帽小朋友", caption: "格纹帽子戴上的瞬间，可爱像被正式盖了章。" },
+  { src: "assets/gallery/photo-19.jpg", title: "阳光近照", caption: "阳光落在脸上的这张很温柔，眼镜里的光也很好看。" },
+  { src: "assets/gallery/photo-20.jpg", title: "挥挥手", caption: "坐在床边挥手的样子，像在说：快过来陪我。" },
+  { src: "assets/gallery/photo-21.jpg", title: "毕业花花", caption: "单膝送花的瞬间有点搞笑，但花是真的，喜欢也是真的。" },
+  { src: "assets/gallery/photo-22.jpg", title: "校园纪念", caption: "红色建筑和学士服一起入镜，把重要日子拍得很正式。" },
+  { src: "assets/gallery/photo-23.jpg", title: "小发夹展示", caption: "举起小发夹认真展示，连逛店的小瞬间都可爱得很具体。" },
+  { src: "assets/gallery/photo-24.jpg", title: "窗边合照", caption: "靠窗的位置、自然光和并肩的距离，都刚刚好。" },
+  { src: "assets/gallery/photo-25.jpg", title: "出发啦", caption: "站台前的合照像旅程开头，下一站去哪都值得期待。" },
+  { src: "assets/gallery/photo-26.jpg", title: "草帽时间", caption: "一排草帽作背景，你戴的这一顶最有故事感。" },
+  { src: "assets/gallery/photo-27.jpg", title: "转身一下", caption: "画面有点晃，但转身看过来的那一下很有生活里的可爱。" }
+];
 const card = document.querySelector("[data-card]");
 const photo = document.querySelector("[data-photo]");
 const indexLabel = document.querySelector("[data-index]");
@@ -56,7 +84,7 @@ function showSlide(nextIndex, withSparkle = false) {
   window.setTimeout(() => {
     photo.src = item.src;
     photo.alt = item.title;
-    indexLabel.textContent = `${pad(current + 1)} / ${galleryItems.length}`;
+    indexLabel.textContent = `第 ${pad(current + 1)} 张`;
     titleLabel.textContent = item.title;
     captionLabel.textContent = item.caption;
     progress.style.width = `${((current + 1) / galleryItems.length) * 100}%`;
