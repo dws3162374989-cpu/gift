@@ -396,15 +396,15 @@ document.querySelectorAll("[data-next]").forEach((button) => {
 document.querySelector("[data-prev]").addEventListener("click", () => showSlide(current - 1, true));
 document.querySelector("[data-autoplay]").addEventListener("click", (event) => toggleAutoplay(event.currentTarget));
 document.querySelector("[data-music]").addEventListener("click", (event) => toggleMusic(event.currentTarget));
-document.querySelector("[data-sweet]").addEventListener("click", () => {
-  showToast(sweetLines[Math.floor(Math.random() * sweetLines.length)]);
-  popHearts();
-});
 luckyButton.addEventListener("click", () => {
   showSlide(luckyIndex, true);
   showToast(`已跳到今日幸运：${galleryItems[luckyIndex].title}`);
 });
 secretCard.addEventListener("click", hideSecret);
+
+photo.draggable = false;
+viewer.addEventListener("contextmenu", (event) => event.preventDefault());
+photo.addEventListener("contextmenu", (event) => event.preventDefault());
 
 viewer.addEventListener("click", (event) => {
   if (event.detail > 1 || didSwipe || longPressed) {
