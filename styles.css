@@ -25,6 +25,10 @@ body {
   font-family: Arial, "Microsoft YaHei", sans-serif;
 }
 
+body.is-transitioning {
+  overflow: hidden;
+}
+
 button {
   font: inherit;
 }
@@ -122,7 +126,7 @@ h1 {
   border: 2px solid var(--ink);
   border-radius: 30px;
   box-shadow: var(--shadow);
-  transition: transform .35s ease, opacity .25s ease;
+  transition: transform .46s cubic-bezier(.2, .8, .2, 1), opacity .28s ease, filter .28s ease;
 }
 
 .photo-card::before,
@@ -149,8 +153,13 @@ h1 {
 }
 
 .photo-card.is-flipping {
-  opacity: .72;
-  transform: rotate(.8deg) scale(.985);
+  opacity: .58;
+  filter: saturate(.86) blur(2px);
+  transform: rotate(.8deg) scale(.965) translateY(8px);
+}
+
+.photo-card.is-arriving {
+  animation: photoArrive .52s cubic-bezier(.2, .8, .2, 1);
 }
 
 .photo-card img {
@@ -304,6 +313,37 @@ figcaption p {
   font-weight: 800;
 }
 
+.page-wipe {
+  position: fixed;
+  z-index: 18;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(255 255 255 / 96%) 0 16%, rgb(255 241 236 / 88%) 17% 35%, transparent 58%),
+    linear-gradient(135deg, rgb(238 111 139 / 18%), rgb(139 211 189 / 16%));
+  transform: scale(.96);
+}
+
+.page-wipe span {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  color: #fff;
+  background: var(--rose);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 20px 50px rgb(43 29 26 / 20%);
+  font-size: 38px;
+}
+
+.page-wipe.is-active {
+  animation: pageWipe .62s ease both;
+}
+
 .toast {
   position: fixed;
   z-index: 20;
@@ -357,29 +397,100 @@ figcaption p {
   }
 }
 
+@keyframes pageWipe {
+  0% {
+    opacity: 0;
+    transform: scale(.96);
+  }
+  38% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes photoArrive {
+  from {
+    opacity: .35;
+    transform: translateY(14px) scale(.975);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (max-width: 860px) {
   .app {
-    padding: 16px;
+    padding: 12px;
   }
 
   .hero {
     min-height: auto;
     grid-template-columns: 1fr;
-    padding-top: 8px;
+    gap: 14px;
+    padding-top: 6px;
+  }
+
+  .intro {
+    padding: 2px 2px 0;
   }
 
   h1 {
-    max-width: 8em;
+    max-width: 9em;
+    margin-bottom: 10px;
+    font-size: clamp(32px, 10vw, 48px);
+  }
+
+  .lead {
+    font-size: 16px;
+    line-height: 1.65;
   }
 
   .toolbar {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .pill {
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 15px;
+  }
+
+  .album {
+    width: 100%;
+  }
+
+  .photo-card {
+    padding: 8px;
+    border-radius: 24px;
   }
 
   .photo-card img {
-    height: min(58vh, 540px);
-    min-height: 330px;
+    height: min(54vh, 500px);
+    min-height: 300px;
+    border-radius: 16px 16px 10px 10px;
+  }
+
+  figcaption {
+    margin-top: 8px;
+    padding: 12px;
+  }
+
+  figcaption strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 18px;
+  }
+
+  figcaption p {
+    font-size: 15px;
   }
 
   .prev {
@@ -388,6 +499,35 @@ figcaption p {
 
   .next {
     right: 10px;
+  }
+
+  .filmstrip {
+    gap: 7px;
+    padding-bottom: 8px;
+  }
+
+  .thumb {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+  }
+
+  .note {
+    margin: 16px 0 26px;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .note h2 {
+    font-size: 28px;
+  }
+
+  .note p {
+    font-size: 16px;
+  }
+
+  .badges span {
+    font-size: 14px;
   }
 }
 
@@ -398,10 +538,31 @@ figcaption p {
 
   .nav {
     top: auto;
-    bottom: 116px;
+    bottom: 122px;
+    width: 42px;
+    height: 42px;
+    font-size: 30px;
   }
 
   .photo-card img {
-    height: min(55vh, 480px);
+    height: min(52vh, 460px);
+    min-height: 280px;
+  }
+
+  .photo-card::before,
+  .photo-card::after {
+    width: 62px;
+    height: 24px;
+  }
+
+  .toast {
+    bottom: 16px;
+    border-radius: 18px;
+  }
+
+  .page-wipe span {
+    width: 66px;
+    height: 66px;
+    font-size: 32px;
   }
 }

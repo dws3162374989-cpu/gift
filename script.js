@@ -35,6 +35,7 @@ const captionLabel = document.querySelector("[data-caption]");
 const progress = document.querySelector("[data-progress]");
 const thumbs = document.querySelector("[data-thumbs]");
 const toast = document.querySelector("[data-toast]");
+const wipe = document.querySelector("[data-wipe]");
 const canvas = document.querySelector("#confetti");
 const ctx = canvas.getContext("2d");
 
@@ -80,6 +81,7 @@ function showSlide(nextIndex, withSparkle = false) {
   current = (nextIndex + galleryItems.length) % galleryItems.length;
   const item = galleryItems[current];
 
+  playTransition();
   card.classList.add("is-flipping");
   window.setTimeout(() => {
     photo.src = item.src;
@@ -97,8 +99,24 @@ function showSlide(nextIndex, withSparkle = false) {
     });
 
     card.classList.remove("is-flipping");
+    card.classList.remove("is-arriving");
+    void card.offsetWidth;
+    card.classList.add("is-arriving");
     if (withSparkle) popHearts();
   }, 120);
+}
+
+function playTransition() {
+  if (!wipe) return;
+  document.body.classList.add("is-transitioning");
+  wipe.classList.remove("is-active");
+  void wipe.offsetWidth;
+  wipe.classList.add("is-active");
+  window.clearTimeout(playTransition.timer);
+  playTransition.timer = window.setTimeout(() => {
+    wipe.classList.remove("is-active");
+    document.body.classList.remove("is-transitioning");
+  }, 640);
 }
 
 function showToast(message) {
