@@ -1,31 +1,31 @@
 const galleryItems = [
-  { src: "assets/gallery/photo-01.jpg", title: "小心心发射", caption: "近距离小心心已经送达，今天的可爱先贴脸签收。" },
-  { src: "assets/gallery/photo-02.jpg", title: "窗边比耶", caption: "车窗外的风景飞快后退，镜头里的比耶小朋友稳稳可爱。" },
-  { src: "assets/gallery/photo-03.jpg", title: "地铁贴贴", caption: "车厢里的近距离合照，认真看镜头的样子很适合被收藏。" },
-  { src: "assets/gallery/photo-04.jpg", title: "视频亲亲", caption: "手机里和现实里同步卖萌，幼稚得刚刚好，也甜得刚刚好。" },
-  { src: "assets/gallery/photo-05.jpg", title: "毕业认证", caption: "校名、学士服和并肩合照一起出现，这一天当然要郑重保存。" },
-  { src: "assets/gallery/photo-06.jpg", title: "双人补水站", caption: "两瓶水挡在前面，但挡不住这张照片里的陪伴感。" },
-  { src: "assets/gallery/photo-07.jpg", title: "候车小片段", caption: "大厅里的等待时间，因为这张贴近镜头的合照变得很有纪念感。" },
-  { src: "assets/gallery/photo-08.jpg", title: "红柱小憩", caption: "红色柱子、木椅和阳光都很暖，但最亮眼的还是你。" },
-  { src: "assets/gallery/photo-09.jpg", title: "夜色比耶", caption: "路灯亮起来的时候，比耶手势也刚好把夜晚变得可爱。" },
-  { src: "assets/gallery/photo-10.jpg", title: "花束公主", caption: "黑裙和蓝紫花束刚好相配，像把温柔认真地捧在手里。" },
-  { src: "assets/gallery/photo-11.jpg", title: "小站台", caption: "坐在银色座椅边认真看手机，连等车的瞬间都很有画面感。" },
-  { src: "assets/gallery/photo-12.jpg", title: "比耶小黄裙", caption: "黄色裙子和比耶手势一起出现，甜度直接调到满格。" },
-  { src: "assets/gallery/photo-13.jpg", title: "城墙快乐", caption: "在城墙边举高手的那一刻，快乐很明显，喜欢也很明显。" },
-  { src: "assets/gallery/photo-14.jpg", title: "比耶选手", caption: "戴眼镜比耶选手再次上线，表情好到必须立刻夸夸。" },
-  { src: "assets/gallery/photo-15.jpg", title: "毕业合照", caption: "花束在中间，你们站在一起，这张毕业照认真又可爱。" },
-  { src: "assets/gallery/photo-16.jpg", title: "地铁小惊喜", caption: "车厢里的随手自拍，把普通路程变成只有你们知道的小片段。" },
-  { src: "assets/gallery/photo-17.jpg", title: "花墙前", caption: "花墙在后面开得热闹，你在前面看起来温柔又清亮。" },
-  { src: "assets/gallery/photo-18.jpg", title: "戴帽小朋友", caption: "格纹帽子戴上的瞬间，可爱像被正式盖了章。" },
-  { src: "assets/gallery/photo-19.jpg", title: "阳光近照", caption: "阳光落在脸上的这张很温柔，眼镜里的光也很好看。" },
-  { src: "assets/gallery/photo-20.jpg", title: "挥挥手", caption: "坐在床边挥手的样子，像在说：快过来陪我。" },
-  { src: "assets/gallery/photo-21.jpg", title: "毕业花花", caption: "单膝送花的瞬间有点搞笑，但花是真的，喜欢也是真的。" },
-  { src: "assets/gallery/photo-22.jpg", title: "校园纪念", caption: "红色建筑和学士服一起入镜，把重要日子拍得很正式。" },
-  { src: "assets/gallery/photo-23.jpg", title: "小发夹展示", caption: "举起小发夹认真展示，连逛店的小瞬间都可爱得很具体。" },
-  { src: "assets/gallery/photo-24.jpg", title: "窗边合照", caption: "靠窗的位置、自然光和并肩的距离，都刚刚好。" },
-  { src: "assets/gallery/photo-25.jpg", title: "出发啦", caption: "站台前的合照像旅程开头，下一站去哪里都值得期待。" },
-  { src: "assets/gallery/photo-26.jpg", title: "草帽时间", caption: "一排草帽作背景，你戴的这一顶最有故事感。" },
-  { src: "assets/gallery/photo-27.jpg", title: "转身一下", caption: "画面有点晃，但转身看过来的那一下很有生活里的可爱。" }
+  { src: "assets/gallery/photo-01.jpg", title: "手指小心心", caption: "黄色小裙子加贴脸小心心，今天的可爱先由你本人亲自派送。" },
+  { src: "assets/gallery/photo-02.jpg", title: "高铁比耶", caption: "窗外风景在飞，镜头里的比耶小朋友稳稳营业，乖得很认真。" },
+  { src: "assets/gallery/photo-03.jpg", title: "车厢贴贴", caption: "地铁里的近距离合照，距离很近，喜欢也不用藏得太远。" },
+  { src: "assets/gallery/photo-04.jpg", title: "隔空亲亲", caption: "手机里一个亲亲，现实里一个偷笑，幼稚但非常值得收藏。" },
+  { src: "assets/gallery/photo-05.jpg", title: "毕业招牌照", caption: "校名、学士服和并肩合照都在，这一天必须被郑重盖章。" },
+  { src: "assets/gallery/photo-06.jpg", title: "双人补水站", caption: "两瓶水抢镜失败，因为后面的你们更像今日限定快乐。" },
+  { src: "assets/gallery/photo-07.jpg", title: "候车大厅", caption: "在大厅等车也能拍得像小电影，方景源小朋友自带主角感。" },
+  { src: "assets/gallery/photo-08.jpg", title: "红柱长椅", caption: "红色柱子、木椅和阳光都很暖，但最亮眼的还是这个比耶。" },
+  { src: "assets/gallery/photo-09.jpg", title: "夜色比耶", caption: "路灯亮起来，夜晚变软一点，你的比耶把画面变甜一点。" },
+  { src: "assets/gallery/photo-10.jpg", title: "黑裙花束", caption: "黑裙和蓝紫花束刚好相配，像把温柔认真捧在手心里。" },
+  { src: "assets/gallery/photo-11.jpg", title: "银色座位", caption: "靠在银色座椅边看手机，随手一拍都是安静又可爱的片段。" },
+  { src: "assets/gallery/photo-12.jpg", title: "小黄裙比耶", caption: "黄裙子、双手比耶、微微偷笑，甜度直接拉到满格。" },
+  { src: "assets/gallery/photo-13.jpg", title: "城墙举手", caption: "城墙边举高手的那一秒，快乐很明显，我喜欢也很明显。" },
+  { src: "assets/gallery/photo-14.jpg", title: "窗帘自拍", caption: "白衣服配小比耶，像偷偷把今天的可爱缓存了一份。" },
+  { src: "assets/gallery/photo-15.jpg", title: "毕业并肩", caption: "花束在中间，你们并肩站好，这张正式里还藏着一点乖。" },
+  { src: "assets/gallery/photo-16.jpg", title: "地铁小笑", caption: "车厢里看镜头的小笑很轻，但足够把普通路程变成纪念。" },
+  { src: "assets/gallery/photo-17.jpg", title: "花墙自拍", caption: "手指差点抢镜，花墙也很热闹，但你还是画面重点。" },
+  { src: "assets/gallery/photo-18.jpg", title: "格纹帽子", caption: "帽子一戴，乖巧值加满；认真看镜头的时候更像被偏爱的小朋友。" },
+  { src: "assets/gallery/photo-19.jpg", title: "阳光近照", caption: "阳光落在眼镜和脸上，这张软乎乎的，适合反复看。" },
+  { src: "assets/gallery/photo-20.jpg", title: "床边挥手", caption: "坐在床边挥挥手，像在说：快来陪我，不许慢吞吞。" },
+  { src: "assets/gallery/photo-21.jpg", title: "花束求夸", caption: "单膝送花有点搞笑，但花是真的，喜欢是真的，想哄你也是真的。" },
+  { src: "assets/gallery/photo-22.jpg", title: "校园指认", caption: "红色建筑前一起指向镜头，像在宣布：这一页回忆归我们。" },
+  { src: "assets/gallery/photo-23.jpg", title: "发夹展示", caption: "举起小发夹认真展示，逛店的小瞬间也被你变得很可爱。" },
+  { src: "assets/gallery/photo-24.jpg", title: "站口合照", caption: "出发前的合照，有阳光、有风、还有一起去下一站的期待。" },
+  { src: "assets/gallery/photo-25.jpg", title: "窗边座位", caption: "靠窗坐在一起，光线刚好，距离刚好，连沉默都像小约会。" },
+  { src: "assets/gallery/photo-26.jpg", title: "草帽试戴", caption: "一排草帽里，你戴的这一顶最像夏天偷偷给你开的玩笑。" },
+  { src: "assets/gallery/photo-27.jpg", title: "小黄裙转身", caption: "画面有点晃，但转身看过来的那一下，很像生活里突然冒出的甜。" }
 ];
 
 const card = document.querySelector("[data-card]");
@@ -56,9 +56,12 @@ let animationFrame = 0;
 let autoplayTimer = 0;
 let autoplayOn = false;
 let audioContext = null;
+let masterGain = null;
+let compressor = null;
 let musicTimer = 0;
 let musicOn = false;
 let musicStep = 0;
+let nextNoteTime = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 
@@ -196,34 +199,73 @@ function tickConfetti() {
   if (pieces.length) animationFrame = requestAnimationFrame(tickConfetti);
 }
 
-function playTone(frequency, start, duration, volume = 0.045) {
+function setupAudio() {
+  if (audioContext) return;
+
+  const AudioEngine = window.AudioContext || window.webkitAudioContext;
+  audioContext = new AudioEngine();
+  compressor = audioContext.createDynamicsCompressor();
+  compressor.threshold.value = -18;
+  compressor.knee.value = 22;
+  compressor.ratio.value = 4;
+  compressor.attack.value = 0.004;
+  compressor.release.value = 0.22;
+
+  masterGain = audioContext.createGain();
+  masterGain.gain.value = 0.82;
+  masterGain.connect(compressor).connect(audioContext.destination);
+}
+
+function playTone(frequency, start, duration, volume, type = "triangle") {
   const oscillator = audioContext.createOscillator();
   const gain = audioContext.createGain();
-  oscillator.type = "sine";
+  oscillator.type = type;
   oscillator.frequency.setValueAtTime(frequency, start);
   gain.gain.setValueAtTime(0.0001, start);
-  gain.gain.exponentialRampToValueAtTime(volume, start + 0.025);
+  gain.gain.exponentialRampToValueAtTime(volume, start + 0.018);
+  gain.gain.exponentialRampToValueAtTime(Math.max(volume * 0.36, 0.0001), start + duration * 0.58);
   gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-  oscillator.connect(gain).connect(audioContext.destination);
+  oscillator.connect(gain).connect(masterGain);
   oscillator.start(start);
-  oscillator.stop(start + duration + 0.04);
+  oscillator.stop(start + duration + 0.03);
 }
 
-function playMusicStep() {
+function scheduleBeat(step, time) {
+  const melody = [659.25, 783.99, 880.0, 783.99, 659.25, 587.33, 659.25, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25, 493.88, 523.25];
+  const chords = [
+    [329.63, 392.0],
+    [392.0, 493.88],
+    [440.0, 523.25],
+    [349.23, 440.0]
+  ];
+  const bass = [164.81, 196.0, 220.0, 174.61];
+  const beat = step % melody.length;
+  const chord = chords[Math.floor(beat / 4) % chords.length];
+
+  playTone(melody[beat], time, 0.24, 0.16, beat % 2 ? "sine" : "triangle");
+  playTone(chord[0], time + 0.018, 0.42, 0.072, "sine");
+  playTone(chord[1], time + 0.034, 0.42, 0.052, "sine");
+
+  if (beat % 4 === 0) {
+    playTone(bass[Math.floor(beat / 4) % bass.length], time, 0.5, 0.07, "sine");
+  }
+}
+
+function scheduleMusic() {
   if (!audioContext || !musicOn) return;
 
-  const melody = [523.25, 659.25, 783.99, 659.25, 587.33, 659.25, 523.25, 392.0];
-  const harmony = [261.63, 329.63, 392.0, 329.63, 293.66, 329.63, 261.63, 196.0];
-  const now = audioContext.currentTime;
-  const index = musicStep % melody.length;
-
-  playTone(melody[index], now, 0.34, 0.048);
-  playTone(harmony[index], now + 0.02, 0.46, 0.023);
-  musicStep += 1;
+  while (nextNoteTime < audioContext.currentTime + 0.72) {
+    scheduleBeat(musicStep, nextNoteTime);
+    nextNoteTime += 0.28;
+    musicStep += 1;
+  }
 }
 
-function toggleMusic(button) {
-  if (!audioContext) audioContext = new AudioContext();
+async function toggleMusic(button) {
+  setupAudio();
+  if (audioContext.state === "suspended") {
+    await audioContext.resume();
+  }
 
   musicOn = !musicOn;
   button.classList.toggle("is-on", musicOn);
@@ -232,12 +274,13 @@ function toggleMusic(button) {
 
   if (musicOn) {
     musicStep = 0;
-    playMusicStep();
-    musicTimer = window.setInterval(playMusicStep, 420);
-    showToast("小背景乐上线，陪你慢慢翻。");
+    nextNoteTime = audioContext.currentTime + 0.04;
+    scheduleMusic();
+    musicTimer = window.setInterval(scheduleMusic, 80);
+    showToast("宠溺小曲上线，音量已加甜。");
   } else {
     window.clearInterval(musicTimer);
-    showToast("音乐先休息，甜度还在。");
+    showToast("音乐先暂停，可爱不暂停。");
   }
 }
 
