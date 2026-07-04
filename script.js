@@ -1,5 +1,5 @@
 const galleryItems = [
-  { src: "assets/gallery/photo-01.jpg", title: "小心心发射", caption: "近距离小心心已经送达，今日份可爱直接贴脸暴击。" },
+  { src: "assets/gallery/photo-01.jpg", title: "小心心发射", caption: "近距离小心心已经送达，今天的可爱先贴脸签收。" },
   { src: "assets/gallery/photo-02.jpg", title: "窗边比耶", caption: "车窗外的风景飞快后退，镜头里的比耶小朋友稳稳可爱。" },
   { src: "assets/gallery/photo-03.jpg", title: "地铁贴贴", caption: "车厢里的近距离合照，认真看镜头的样子很适合被收藏。" },
   { src: "assets/gallery/photo-04.jpg", title: "视频亲亲", caption: "手机里和现实里同步卖萌，幼稚得刚刚好，也甜得刚刚好。" },
@@ -12,9 +12,9 @@ const galleryItems = [
   { src: "assets/gallery/photo-11.jpg", title: "小站台", caption: "坐在银色座椅边认真看手机，连等车的瞬间都很有画面感。" },
   { src: "assets/gallery/photo-12.jpg", title: "比耶小黄裙", caption: "黄色裙子和比耶手势一起出现，甜度直接调到满格。" },
   { src: "assets/gallery/photo-13.jpg", title: "城墙快乐", caption: "在城墙边举高手的那一刻，快乐很明显，喜欢也很明显。" },
-  { src: "assets/gallery/photo-14.jpg", title: "比耶选手", caption: "戴眼镜比耶选手再次上线，表情乖到必须立刻夸夸。" },
+  { src: "assets/gallery/photo-14.jpg", title: "比耶选手", caption: "戴眼镜比耶选手再次上线，表情好到必须立刻夸夸。" },
   { src: "assets/gallery/photo-15.jpg", title: "毕业合照", caption: "花束在中间，你们站在一起，这张毕业照认真又可爱。" },
-  { src: "assets/gallery/photo-16.jpg", title: "地铁小惊喜", caption: "车厢里的随手自拍，把普通路程变成了只有你们知道的小片段。" },
+  { src: "assets/gallery/photo-16.jpg", title: "地铁小惊喜", caption: "车厢里的随手自拍，把普通路程变成只有你们知道的小片段。" },
   { src: "assets/gallery/photo-17.jpg", title: "花墙前", caption: "花墙在后面开得热闹，你在前面看起来温柔又清亮。" },
   { src: "assets/gallery/photo-18.jpg", title: "戴帽小朋友", caption: "格纹帽子戴上的瞬间，可爱像被正式盖了章。" },
   { src: "assets/gallery/photo-19.jpg", title: "阳光近照", caption: "阳光落在脸上的这张很温柔，眼镜里的光也很好看。" },
@@ -23,10 +23,11 @@ const galleryItems = [
   { src: "assets/gallery/photo-22.jpg", title: "校园纪念", caption: "红色建筑和学士服一起入镜，把重要日子拍得很正式。" },
   { src: "assets/gallery/photo-23.jpg", title: "小发夹展示", caption: "举起小发夹认真展示，连逛店的小瞬间都可爱得很具体。" },
   { src: "assets/gallery/photo-24.jpg", title: "窗边合照", caption: "靠窗的位置、自然光和并肩的距离，都刚刚好。" },
-  { src: "assets/gallery/photo-25.jpg", title: "出发啦", caption: "站台前的合照像旅程开头，下一站去哪都值得期待。" },
+  { src: "assets/gallery/photo-25.jpg", title: "出发啦", caption: "站台前的合照像旅程开头，下一站去哪里都值得期待。" },
   { src: "assets/gallery/photo-26.jpg", title: "草帽时间", caption: "一排草帽作背景，你戴的这一顶最有故事感。" },
   { src: "assets/gallery/photo-27.jpg", title: "转身一下", caption: "画面有点晃，但转身看过来的那一下很有生活里的可爱。" }
 ];
+
 const card = document.querySelector("[data-card]");
 const photo = document.querySelector("[data-photo]");
 const indexLabel = document.querySelector("[data-index]");
@@ -37,13 +38,14 @@ const thumbs = document.querySelector("[data-thumbs]");
 const toast = document.querySelector("[data-toast]");
 const wipe = document.querySelector("[data-wipe]");
 const viewer = document.querySelector("[data-viewer]");
+const story = document.querySelector(".story");
 const canvas = document.querySelector("#confetti");
 const ctx = canvas.getContext("2d");
 
 const sweetLines = [
   "今日甜话：方景源小朋友，允许你今天多可爱一点。",
   "系统提示：你已获得无限偏爱权限。",
-  "投喂成功：今日份喜欢已经送达。",
+  "投喂成功：今天的喜欢已经送达。",
   "隐藏彩蛋：你一出现，快乐就自动刷新。",
   "认证完成：最值得被宠的人，是你。"
 ];
@@ -84,11 +86,11 @@ function showSlide(nextIndex, withSparkle = false, withTransition = true) {
   current = (nextIndex + galleryItems.length) % galleryItems.length;
   const item = galleryItems[current];
 
-  if (withTransition) {
-    playTransition();
-  }
+  if (withTransition) playTransition();
+
   card.classList.add("is-flipping");
   window.setTimeout(() => {
+    story.style.setProperty("--photo", `url("${item.src}")`);
     photo.src = item.src;
     photo.alt = item.title;
     indexLabel.textContent = `第 ${pad(current + 1)} 张`;
@@ -108,7 +110,7 @@ function showSlide(nextIndex, withSparkle = false, withTransition = true) {
     void card.offsetWidth;
     card.classList.add("is-arriving");
     if (withSparkle) popHearts();
-  }, withTransition ? 210 : 0);
+  }, withTransition ? 170 : 0);
 }
 
 function playTransition() {
@@ -121,24 +123,24 @@ function playTransition() {
   playTransition.timer = window.setTimeout(() => {
     wipe.classList.remove("is-active");
     document.body.classList.remove("is-transitioning");
-  }, 640);
+  }, 620);
 }
 
 function showToast(message) {
   toast.textContent = message;
   toast.classList.add("is-visible");
   window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2300);
+  showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
 }
 
 function popHearts() {
-  for (let i = 0; i < 9; i += 1) {
+  for (let i = 0; i < 7; i += 1) {
     const heart = document.createElement("span");
     heart.className = "float-heart";
     heart.textContent = "♥";
-    heart.style.setProperty("--x", `${20 + Math.random() * 60}vw`);
-    heart.style.setProperty("--y", `${35 + Math.random() * 40}vh`);
-    heart.style.setProperty("--s", `${18 + Math.random() * 24}px`);
+    heart.style.setProperty("--x", `${18 + Math.random() * 64}vw`);
+    heart.style.setProperty("--y", `${28 + Math.random() * 46}vh`);
+    heart.style.setProperty("--s", `${16 + Math.random() * 22}px`);
     document.body.append(heart);
     window.setTimeout(() => heart.remove(), 1300);
   }
@@ -152,17 +154,17 @@ function resizeCanvas() {
 }
 
 function launchConfetti() {
-  const colors = ["#ee6f8b", "#ffb896", "#ffe28a", "#8bd3bd", "#95bdff", "#ffffff"];
-  pieces = Array.from({ length: 95 }, () => ({
+  const colors = ["#ef7891", "#ffb896", "#ffe48d", "#8bd3bd", "#ffffff"];
+  pieces = Array.from({ length: 70 }, () => ({
     x: window.innerWidth * (0.18 + Math.random() * 0.64),
-    y: window.innerHeight * 0.22,
-    size: 5 + Math.random() * 9,
-    vx: -4 + Math.random() * 8,
-    vy: -7 - Math.random() * 7,
+    y: window.innerHeight * 0.24,
+    size: 4 + Math.random() * 8,
+    vx: -3.5 + Math.random() * 7,
+    vy: -6 - Math.random() * 6,
     rotation: Math.random() * Math.PI,
-    spin: -0.18 + Math.random() * 0.36,
+    spin: -0.16 + Math.random() * 0.32,
     color: colors[Math.floor(Math.random() * colors.length)],
-    life: 80 + Math.random() * 50
+    life: 70 + Math.random() * 45
   }));
 
   cancelAnimationFrame(animationFrame);
@@ -176,7 +178,7 @@ function tickConfetti() {
       ...piece,
       x: piece.x + piece.vx,
       y: piece.y + piece.vy,
-      vy: piece.vy + 0.3,
+      vy: piece.vy + 0.28,
       rotation: piece.rotation + piece.spin,
       life: piece.life - 1
     }))
@@ -191,12 +193,10 @@ function tickConfetti() {
     ctx.restore();
   }
 
-  if (pieces.length) {
-    animationFrame = requestAnimationFrame(tickConfetti);
-  }
+  if (pieces.length) animationFrame = requestAnimationFrame(tickConfetti);
 }
 
-function playTone(frequency, start, duration, volume = 0.055) {
+function playTone(frequency, start, duration, volume = 0.045) {
   const oscillator = audioContext.createOscillator();
   const gain = audioContext.createGain();
   oscillator.type = "sine";
@@ -217,42 +217,41 @@ function playMusicStep() {
   const now = audioContext.currentTime;
   const index = musicStep % melody.length;
 
-  playTone(melody[index], now, 0.34, 0.055);
-  playTone(harmony[index], now + 0.02, 0.46, 0.025);
+  playTone(melody[index], now, 0.34, 0.048);
+  playTone(harmony[index], now + 0.02, 0.46, 0.023);
   musicStep += 1;
 }
 
 function toggleMusic(button) {
-  if (!audioContext) {
-    audioContext = new AudioContext();
-  }
+  if (!audioContext) audioContext = new AudioContext();
 
   musicOn = !musicOn;
   button.classList.toggle("is-on", musicOn);
-  button.textContent = musicOn ? "暂停音乐" : "开启音乐";
+  button.textContent = musicOn ? "Ⅱ" : "♪";
+  button.setAttribute("aria-label", musicOn ? "暂停音乐" : "开启音乐");
 
   if (musicOn) {
     musicStep = 0;
     playMusicStep();
     musicTimer = window.setInterval(playMusicStep, 420);
-    showToast("循环音乐已开启，快乐连续播放。");
+    showToast("小背景乐上线，陪你慢慢翻。");
   } else {
     window.clearInterval(musicTimer);
-    showToast("音乐暂停，照片继续甜。");
+    showToast("音乐先休息，甜度还在。");
   }
 }
 
 function toggleAutoplay(button) {
   autoplayOn = !autoplayOn;
   button.classList.toggle("is-on", autoplayOn);
-  button.textContent = autoplayOn ? "暂停播放" : "自动播放";
+  button.textContent = autoplayOn ? "暂停" : "自动";
 
   if (autoplayOn) {
-    autoplayTimer = window.setInterval(() => showSlide(current + 1), 2600);
-    showToast("自动播放已开启。");
+    autoplayTimer = window.setInterval(() => showSlide(current + 1), 2800);
+    showToast("自动翻页开始，坐好看可爱。");
   } else {
     window.clearInterval(autoplayTimer);
-    showToast("自动播放暂停。");
+    showToast("自动翻页暂停。");
   }
 }
 
@@ -282,7 +281,7 @@ viewer.addEventListener("touchend", (event) => {
   const dx = touch.clientX - touchStartX;
   const dy = touch.clientY - touchStartY;
 
-  if (Math.abs(dx) < 46 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+  if (Math.abs(dx) < 44 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
   showSlide(current + (dx < 0 ? 1 : -1), true);
 }, { passive: true });
 

@@ -2,65 +2,62 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fff1ec">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#160f10">
   <title>方景源小朋友的快乐相册</title>
   <link rel="preload" href="assets/gallery/photo-01.jpg" as="image">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app">
-    <section class="hero" aria-label="NFC 礼物相册">
-      <div class="intro">
-        <p class="eyebrow">Tap opened</p>
-        <h1>方景源小朋友的快乐放映厅</h1>
-        <p class="lead">把喜欢藏进每一张照片里。点开 NFC 的时候，就像打开一整盒甜甜的小回忆。</p>
-
-        <div class="toolbar" aria-label="互动按钮">
-          <button type="button" class="pill primary" data-next>下一张</button>
-          <button type="button" class="pill" data-autoplay>自动播放</button>
-          <button type="button" class="pill" data-music>开启音乐</button>
-          <button type="button" class="pill" data-sweet>今日甜话</button>
-        </div>
+    <section class="story" aria-label="方景源小朋友的快乐相册">
+      <div class="topbar">
+        <span class="signal">NFC 小剧场</span>
+        <button type="button" class="icon-button" data-music aria-label="开启音乐">♪</button>
       </div>
 
-      <section class="album" aria-label="照片相册">
-        <div class="viewer" data-viewer>
-          <button type="button" class="nav prev" data-prev aria-label="上一张">‹</button>
-          <figure class="photo-card" data-card>
-            <img data-photo src="assets/gallery/photo-01.jpg" alt="相册照片">
-            <figcaption>
-              <span data-index>第 01 张</span>
-              <strong data-title>快乐载入中</strong>
-              <p data-caption>请稍等，正在准备今天的宠溺。</p>
-            </figcaption>
-          </figure>
-          <button type="button" class="nav next" data-next aria-label="下一张">›</button>
-        </div>
+      <div class="viewer" data-viewer>
+        <figure class="photo-stage" data-card>
+          <img data-photo src="assets/gallery/photo-01.jpg" alt="相册照片">
+          <figcaption class="caption">
+            <span class="kicker" data-index>第 01 张</span>
+            <strong data-title>快乐载入中</strong>
+            <p data-caption>正在把今天的宠溺摆到你面前。</p>
+          </figcaption>
+        </figure>
+      </div>
 
-        <div class="progress" aria-label="照片进度">
-          <div class="progress-bar" data-progress></div>
-        </div>
+      <div class="side-rail" aria-label="照片切换">
+        <button type="button" class="rail-button" data-prev aria-label="上一张">‹</button>
+        <button type="button" class="rail-button" data-next aria-label="下一张">›</button>
+      </div>
 
-        <div class="filmstrip" data-thumbs aria-label="照片缩略图"></div>
-      </section>
+      <div class="bottom-dock" aria-label="互动按钮">
+        <button type="button" class="dock-button primary" data-next>下一张</button>
+        <button type="button" class="dock-button" data-autoplay>自动</button>
+        <button type="button" class="dock-button" data-sweet>甜话</button>
+      </div>
+
+      <div class="progress" aria-label="照片进度">
+        <div class="progress-bar" data-progress></div>
+      </div>
+
+      <div class="filmstrip" data-thumbs aria-label="照片缩略图"></div>
     </section>
 
     <section class="note" aria-label="隐藏留言">
       <p class="eyebrow">Hidden note</p>
       <h2>本相册使用说明</h2>
-      <p>如果今天很开心，就多看几张；如果今天有点累，就打开音乐，让我隔着这张卡片陪你一小会儿。</p>
+      <p>开心的时候多翻几张，不开心的时候也多翻几张。方景源小朋友拥有本页面最高优先级，被哄、被夸、被偏爱都无需排队。</p>
       <div class="badges">
         <span>本卡最终解释权归方景源所有</span>
-        <span>不许不开心太久</span>
-        <span>想被哄请点下一张</span>
+        <span>不许偷偷皱眉太久</span>
+        <span>想被哄就点下一张</span>
       </div>
     </section>
   </main>
 
-  <div class="page-wipe" data-wipe aria-hidden="true">
-    <span>♥</span>
-  </div>
+  <div class="page-wipe" data-wipe aria-hidden="true"><span>♥</span></div>
   <div class="toast" data-toast role="status" aria-live="polite"></div>
   <canvas id="confetti" aria-hidden="true"></canvas>
   <script src="script.js"></script>
