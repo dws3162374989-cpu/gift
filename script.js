@@ -36,6 +36,7 @@ const progress = document.querySelector("[data-progress]");
 const thumbs = document.querySelector("[data-thumbs]");
 const toast = document.querySelector("[data-toast]");
 const wipe = document.querySelector("[data-wipe]");
+const viewer = document.querySelector("[data-viewer]");
 const canvas = document.querySelector("#confetti");
 const ctx = canvas.getContext("2d");
 
@@ -56,6 +57,8 @@ let audioContext = null;
 let musicTimer = 0;
 let musicOn = false;
 let musicStep = 0;
+let touchStartX = 0;
+let touchStartY = 0;
 
 function pad(number) {
   return String(number).padStart(2, "0");
@@ -75,13 +78,15 @@ function renderThumbs() {
   });
 }
 
-function showSlide(nextIndex, withSparkle = false) {
+function showSlide(nextIndex, withSparkle = false, withTransition = true) {
   if (!galleryItems.length) return;
 
   current = (nextIndex + galleryItems.length) % galleryItems.length;
   const item = galleryItems[current];
 
-  playTransition();
+  if (withTransition) {
+    playTransition();
+  }
   card.classList.add("is-flipping");
   window.setTimeout(() => {
     photo.src = item.src;
@@ -103,7 +108,7 @@ function showSlide(nextIndex, withSparkle = false) {
     void card.offsetWidth;
     card.classList.add("is-arriving");
     if (withSparkle) popHearts();
-  }, 120);
+  }, withTransition ? 210 : 0);
 }
 
 function playTransition() {
@@ -266,7 +271,22 @@ document.querySelector("[data-sweet]").addEventListener("click", () => {
   popHearts();
 });
 
+viewer.addEventListener("touchstart", (event) => {
+  const touch = event.changedTouches[0];
+  touchStartX = touch.clientX;
+  touchStartY = touch.clientY;
+}, { passive: true });
+
+viewer.addEventListener("touchend", (event) => {
+  const touch = event.changedTouches[0];
+  const dx = touch.clientX - touchStartX;
+  const dy = touch.clientY - touchStartY;
+
+  if (Math.abs(dx) < 46 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+  showSlide(current + (dx < 0 ? 1 : -1), true);
+}, { passive: true });
+
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 renderThumbs();
-showSlide(0);
+showSlide(0, false, false);
