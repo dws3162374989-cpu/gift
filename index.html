@@ -12,8 +12,10 @@
   <main class="app">
     <section class="story" aria-label="方景源小朋友的快乐相册">
       <div class="topbar">
-        <span class="signal">NFC 小剧场</span>
-        <button type="button" class="icon-button" data-music aria-label="开启音乐">♪</button>
+        <button type="button" class="signal" data-lucky>今日幸运准备中</button>
+        <div class="top-actions">
+          <button type="button" class="icon-button" data-music aria-label="开启音乐">♪</button>
+        </div>
       </div>
 
       <div class="viewer" data-viewer>
@@ -58,6 +60,11 @@
   </main>
 
   <div class="page-wipe" data-wipe aria-hidden="true"><span>♥</span></div>
+  <div class="secret-card" data-secret-card aria-hidden="true">
+    <p>长按彩蛋</p>
+    <strong data-secret-title>偷偷留言</strong>
+    <span data-secret-text>这一张也被我认真喜欢着。</span>
+  </div>
   <div class="toast" data-toast role="status" aria-live="polite"></div>
   <canvas id="confetti" aria-hidden="true"></canvas>
   <script src="script.js"></script>

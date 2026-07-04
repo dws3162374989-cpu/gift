@@ -39,6 +39,10 @@ const toast = document.querySelector("[data-toast]");
 const wipe = document.querySelector("[data-wipe]");
 const viewer = document.querySelector("[data-viewer]");
 const story = document.querySelector(".story");
+const luckyButton = document.querySelector("[data-lucky]");
+const secretCard = document.querySelector("[data-secret-card]");
+const secretTitle = document.querySelector("[data-secret-title]");
+const secretText = document.querySelector("[data-secret-text]");
 const canvas = document.querySelector("#confetti");
 const ctx = canvas.getContext("2d");
 
@@ -48,6 +52,36 @@ const sweetLines = [
   "投喂成功：今天的喜欢已经送达。",
   "隐藏彩蛋：你一出现，快乐就自动刷新。",
   "认证完成：最值得被宠的人，是你。"
+];
+
+const secretLines = [
+  "这张小心心只允许方景源小朋友本人签收，别人看了也只能羡慕。",
+  "和你一起坐车的时候，目的地会变重要，但旁边是谁更重要。",
+  "车厢里人来人往，可这一小块画面只属于我们。",
+  "隔着屏幕也要亲亲，幼稚一点没关系，反正是给你的。",
+  "毕业这天很正式，我想把你认真开心的样子存久一点。",
+  "两瓶水负责补水，你负责把画面变得很甜。",
+  "等车的时候不算浪费时间，因为旁边是你。",
+  "阳光和红柱都很好看，但我还是先看你。",
+  "夜色刚刚降下来，你刚刚把它变可爱。",
+  "这一束花很温柔，但拿着花的人更温柔。",
+  "认真看手机也会被偷拍，因为我觉得这种日常也珍贵。",
+  "黄色小裙子很适合你，像把夏天悄悄穿在身上。",
+  "这张的快乐太明显了，根本藏不住。",
+  "窗帘旁边的这一下比耶，属于乖巧小朋友证件照。",
+  "并肩站好的样子很正式，但我还是觉得你最可爱。",
+  "地铁里的小笑被我抓到了，归档为今日小确幸。",
+  "花在后面开，你在前面发光，画面分工很明确。",
+  "这顶帽子很会选主人，戴到你头上就合理了。",
+  "阳光偏心了一点，刚好落在你脸上。",
+  "你一挥手，我就想立刻走近一点。",
+  "这张有点搞笑，但也有点认真，刚好像我们。",
+  "校园门口这一张，适合写进很长很长的以后。",
+  "小发夹被认真展示的样子，太像你的小战利品。",
+  "站口的风有点忙，但它没有吹散这份好心情。",
+  "靠窗坐在一起的时候，连沉默都可以很舒服。",
+  "草帽店这一秒，像夏天偷偷给你加了滤镜。",
+  "这张有点晃，所以更像真实生活里突然出现的甜。"
 ];
 
 let current = 0;
@@ -64,6 +98,18 @@ let musicStep = 0;
 let nextNoteTime = 0;
 let touchStartX = 0;
 let touchStartY = 0;
+let pointerStartX = 0;
+let pointerStartY = 0;
+let longPressTimer = 0;
+let secretTimer = 0;
+let tapTimer = 0;
+let lastTapTime = 0;
+let lastTapX = 0;
+let lastTapY = 0;
+let didSwipe = false;
+let longPressed = false;
+let immersiveOn = false;
+let luckyIndex = 0;
 
 function pad(number) {
   return String(number).padStart(2, "0");
@@ -136,17 +182,59 @@ function showToast(message) {
   showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
 }
 
-function popHearts() {
-  for (let i = 0; i < 7; i += 1) {
+function popHeartsAt(x, y, amount = 7) {
+  for (let i = 0; i < amount; i += 1) {
     const heart = document.createElement("span");
     heart.className = "float-heart";
     heart.textContent = "♥";
-    heart.style.setProperty("--x", `${18 + Math.random() * 64}vw`);
-    heart.style.setProperty("--y", `${28 + Math.random() * 46}vh`);
+    heart.style.setProperty("--x", `${x + (-26 + Math.random() * 52)}px`);
+    heart.style.setProperty("--y", `${y + (-16 + Math.random() * 32)}px`);
     heart.style.setProperty("--s", `${16 + Math.random() * 22}px`);
     document.body.append(heart);
     window.setTimeout(() => heart.remove(), 1300);
   }
+}
+
+function popHearts() {
+  popHeartsAt(window.innerWidth * (0.22 + Math.random() * 0.56), window.innerHeight * (0.3 + Math.random() * 0.34), 7);
+}
+
+function showSecret() {
+  const item = galleryItems[current];
+  secretTitle.textContent = `${item.title}的小备注`;
+  secretText.textContent = secretLines[current] || "这一张也被我认真喜欢着。";
+  secretCard.classList.add("is-visible");
+  secretCard.setAttribute("aria-hidden", "false");
+  window.clearTimeout(secretTimer);
+  secretTimer = window.setTimeout(hideSecret, 4300);
+  if (navigator.vibrate) navigator.vibrate(18);
+}
+
+function hideSecret() {
+  secretCard.classList.remove("is-visible");
+  secretCard.setAttribute("aria-hidden", "true");
+}
+
+function toggleImmersive() {
+  immersiveOn = !immersiveOn;
+  story.classList.toggle("is-immersive", immersiveOn);
+  showToast(immersiveOn ? "沉浸看图开启，轻点照片可恢复。" : "小按钮回来了。");
+}
+
+function getLuckyIndex() {
+  const today = new Date();
+  const seed = today.getFullYear() * 372 + (today.getMonth() + 1) * 31 + today.getDate();
+  return seed % galleryItems.length;
+}
+
+function setupLuckyPhoto() {
+  luckyIndex = getLuckyIndex();
+  const lucky = galleryItems[luckyIndex];
+  luckyButton.textContent = `今日幸运：第 ${pad(luckyIndex + 1)} 张`;
+  luckyButton.setAttribute("aria-label", `跳到今日幸运照片：${lucky.title}`);
+  window.setTimeout(() => {
+    showToast(`今日幸运照片：${lucky.title}`);
+  }, 680);
 }
 
 function resizeCanvas() {
@@ -312,6 +400,69 @@ document.querySelector("[data-sweet]").addEventListener("click", () => {
   showToast(sweetLines[Math.floor(Math.random() * sweetLines.length)]);
   popHearts();
 });
+luckyButton.addEventListener("click", () => {
+  showSlide(luckyIndex, true);
+  showToast(`已跳到今日幸运：${galleryItems[luckyIndex].title}`);
+});
+secretCard.addEventListener("click", hideSecret);
+
+viewer.addEventListener("click", (event) => {
+  if (event.detail > 1 || didSwipe || longPressed) {
+    longPressed = false;
+    lastTapTime = 0;
+    window.clearTimeout(tapTimer);
+    return;
+  }
+
+  const now = Date.now();
+  const distance = Math.hypot(event.clientX - lastTapX, event.clientY - lastTapY);
+  if (now - lastTapTime < 330 && distance < 42) {
+    lastTapTime = 0;
+    window.clearTimeout(tapTimer);
+    popHeartsAt(event.clientX, event.clientY, 10);
+    showToast(sweetLines[Math.floor(Math.random() * sweetLines.length)]);
+    return;
+  }
+
+  lastTapTime = now;
+  lastTapX = event.clientX;
+  lastTapY = event.clientY;
+  window.clearTimeout(tapTimer);
+  tapTimer = window.setTimeout(() => {
+    lastTapTime = 0;
+    toggleImmersive();
+  }, 300);
+});
+
+viewer.addEventListener("dblclick", (event) => {
+  window.clearTimeout(tapTimer);
+  lastTapTime = 0;
+  popHeartsAt(event.clientX, event.clientY, 10);
+  showToast(sweetLines[Math.floor(Math.random() * sweetLines.length)]);
+});
+
+viewer.addEventListener("pointerdown", (event) => {
+  pointerStartX = event.clientX;
+  pointerStartY = event.clientY;
+  longPressed = false;
+  window.clearTimeout(longPressTimer);
+  longPressTimer = window.setTimeout(() => {
+    longPressed = true;
+    showSecret();
+  }, 720);
+});
+
+viewer.addEventListener("pointermove", (event) => {
+  const dx = Math.abs(event.clientX - pointerStartX);
+  const dy = Math.abs(event.clientY - pointerStartY);
+  if (dx > 12 || dy > 12) {
+    window.clearTimeout(longPressTimer);
+  }
+});
+
+["pointerup", "pointerleave", "pointercancel"].forEach((eventName) => {
+  viewer.addEventListener(eventName, () => window.clearTimeout(longPressTimer));
+});
 
 viewer.addEventListener("touchstart", (event) => {
   const touch = event.changedTouches[0];
@@ -325,6 +476,10 @@ viewer.addEventListener("touchend", (event) => {
   const dy = touch.clientY - touchStartY;
 
   if (Math.abs(dx) < 44 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+  didSwipe = true;
+  window.setTimeout(() => {
+    didSwipe = false;
+  }, 260);
   showSlide(current + (dx < 0 ? 1 : -1), true);
 }, { passive: true });
 
@@ -332,3 +487,4 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 renderThumbs();
 showSlide(0, false, false);
+setupLuckyPhoto();
