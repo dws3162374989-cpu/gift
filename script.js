@@ -40,6 +40,7 @@ const wipe = document.querySelector("[data-wipe]");
 const viewer = document.querySelector("[data-viewer]");
 const story = document.querySelector(".story");
 const luckyButton = document.querySelector("[data-lucky]");
+const secretButton = document.querySelector("[data-secret]");
 const secretCard = document.querySelector("[data-secret-card]");
 const secretTitle = document.querySelector("[data-secret-title]");
 const secretText = document.querySelector("[data-secret-text]");
@@ -98,16 +99,12 @@ let musicStep = 0;
 let nextNoteTime = 0;
 let touchStartX = 0;
 let touchStartY = 0;
-let pointerStartX = 0;
-let pointerStartY = 0;
-let longPressTimer = 0;
 let secretTimer = 0;
 let tapTimer = 0;
 let lastTapTime = 0;
 let lastTapX = 0;
 let lastTapY = 0;
 let didSwipe = false;
-let longPressed = false;
 let immersiveOn = false;
 let luckyIndex = 0;
 
@@ -400,6 +397,10 @@ luckyButton.addEventListener("click", () => {
   showSlide(luckyIndex, true);
   showToast(`已跳到今日幸运：${galleryItems[luckyIndex].title}`);
 });
+secretButton.addEventListener("click", () => {
+  showSecret();
+  popHearts();
+});
 secretCard.addEventListener("click", hideSecret);
 
 photo.draggable = false;
@@ -407,8 +408,7 @@ viewer.addEventListener("contextmenu", (event) => event.preventDefault());
 photo.addEventListener("contextmenu", (event) => event.preventDefault());
 
 viewer.addEventListener("click", (event) => {
-  if (event.detail > 1 || didSwipe || longPressed) {
-    longPressed = false;
+  if (event.detail > 1 || didSwipe) {
     lastTapTime = 0;
     window.clearTimeout(tapTimer);
     return;
@@ -439,29 +439,6 @@ viewer.addEventListener("dblclick", (event) => {
   lastTapTime = 0;
   popHeartsAt(event.clientX, event.clientY, 10);
   showToast(sweetLines[Math.floor(Math.random() * sweetLines.length)]);
-});
-
-viewer.addEventListener("pointerdown", (event) => {
-  pointerStartX = event.clientX;
-  pointerStartY = event.clientY;
-  longPressed = false;
-  window.clearTimeout(longPressTimer);
-  longPressTimer = window.setTimeout(() => {
-    longPressed = true;
-    showSecret();
-  }, 720);
-});
-
-viewer.addEventListener("pointermove", (event) => {
-  const dx = Math.abs(event.clientX - pointerStartX);
-  const dy = Math.abs(event.clientY - pointerStartY);
-  if (dx > 12 || dy > 12) {
-    window.clearTimeout(longPressTimer);
-  }
-});
-
-["pointerup", "pointerleave", "pointercancel"].forEach((eventName) => {
-  viewer.addEventListener(eventName, () => window.clearTimeout(longPressTimer));
 });
 
 viewer.addEventListener("touchstart", (event) => {

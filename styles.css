@@ -100,7 +100,7 @@ button {
 .signal {
   display: inline-flex;
   appearance: none;
-  max-width: calc(100vw - 82px);
+  max-width: calc(100vw - 132px);
   padding: 8px 12px;
   border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 999px;
@@ -137,6 +137,11 @@ button {
 .icon-button.is-on {
   color: var(--ink);
   background: var(--honey);
+}
+
+.note-button {
+  font-size: 14px;
+  letter-spacing: 0;
 }
 
 .topbar,
