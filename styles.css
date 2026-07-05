@@ -13,14 +13,17 @@
 }
 
 html {
+  min-height: 100%;
   background: #160f10;
 }
 
 body {
   margin: 0;
+  min-height: 100%;
   color: #fff;
   background: #160f10;
   font-family: Arial, "Microsoft YaHei", sans-serif;
+  overscroll-behavior: none;
 }
 
 body.is-transitioning {
@@ -36,6 +39,7 @@ button {
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
   overflow: hidden;
 }
 
@@ -43,9 +47,13 @@ button {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
+  min-height: 100dvh;
   overflow: hidden;
   background: #160f10;
   isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .story::before {
@@ -171,6 +179,10 @@ button {
   place-items: center;
   padding: calc(env(safe-area-inset-top) + 60px) 10px calc(env(safe-area-inset-bottom) + 132px);
   transition: transform .58s cubic-bezier(.2, .8, .2, 1), opacity .28s ease, filter .28s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .photo-stage::before {
@@ -623,6 +635,7 @@ button {
     width: min(430px, 100%);
     min-height: 100vh;
     min-height: 100svh;
+    min-height: 100dvh;
     margin: 0 auto;
     box-shadow: 0 0 0 1px rgb(255 255 255 / 12%), 0 28px 80px rgb(0 0 0 / 38%);
   }

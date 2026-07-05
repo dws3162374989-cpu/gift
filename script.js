@@ -404,8 +404,16 @@ secretButton.addEventListener("click", () => {
 secretCard.addEventListener("click", hideSecret);
 
 photo.draggable = false;
-viewer.addEventListener("contextmenu", (event) => event.preventDefault());
-photo.addEventListener("contextmenu", (event) => event.preventDefault());
+
+function isInsideStory(target) {
+  return target instanceof Element && Boolean(target.closest(".story"));
+}
+
+["contextmenu", "selectstart", "dragstart"].forEach((eventName) => {
+  document.addEventListener(eventName, (event) => {
+    if (isInsideStory(event.target)) event.preventDefault();
+  }, { capture: true });
+});
 
 viewer.addEventListener("click", (event) => {
   if (event.detail > 1 || didSwipe) {
