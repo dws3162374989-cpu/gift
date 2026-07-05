@@ -1,0 +1,26 @@
+{
+  "name": "方景源小朋友的快乐相册",
+  "short_name": "快乐相册",
+  "description": "一张 NFC 卡片打开的专属照片小相册。",
+  "start_url": "/gift/?source=pwa",
+  "scope": "/gift/",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait",
+  "background_color": "#160f10",
+  "theme_color": "#160f10",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

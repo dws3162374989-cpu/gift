@@ -13,18 +13,21 @@
 }
 
 html {
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   background: #160f10;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  min-height: 100svh;
+  width: 100%;
+  height: 100%;
   color: #fff;
   background: #160f10;
   font-family: Arial, "Microsoft YaHei", sans-serif;
-  overflow-x: hidden;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 body.is-transitioning {
@@ -38,14 +41,17 @@ button {
 
 .app {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 .story {
-  position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: #160f10;
   isolation: isolate;
@@ -100,7 +106,7 @@ button {
 .signal {
   display: inline-flex;
   appearance: none;
-  max-width: calc(100vw - 132px);
+  max-width: calc(100vw - 176px);
   padding: 8px 12px;
   border: 1px solid rgb(255 255 255 / 22%);
   border-radius: 999px;
@@ -142,6 +148,10 @@ button {
 .note-button {
   font-size: 14px;
   letter-spacing: 0;
+}
+
+.fullscreen-button {
+  font-size: 14px;
 }
 
 .topbar,
@@ -405,13 +415,21 @@ button {
 }
 
 .note {
-  position: relative;
-  z-index: 3;
-  margin: 0;
-  padding: 26px 18px 34px;
+  display: none;
+  position: fixed;
+  z-index: 19;
+  left: 14px;
+  right: 14px;
+  bottom: calc(78px + env(safe-area-inset-bottom));
+  max-height: min(58vh, 420px);
+  overflow: auto;
+  margin: 0 auto;
+  padding: 22px 18px 24px;
   color: var(--ink);
   background: #fff8f2;
-  border-top: 2px solid rgb(37 23 22 / 72%);
+  border: 1px solid rgb(37 23 22 / 12%);
+  border-radius: 24px;
+  box-shadow: 0 26px 70px rgb(0 0 0 / 28%);
 }
 
 .eyebrow {
@@ -626,8 +644,17 @@ button {
 
   .app {
     width: min(430px, 100%);
+    height: 100vh;
+    height: 100dvh;
     margin: 0 auto;
     box-shadow: 0 0 0 1px rgb(255 255 255 / 12%), 0 28px 80px rgb(0 0 0 / 38%);
+  }
+
+  .story {
+    width: min(430px, 100%);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 
   .topbar,
