@@ -40,7 +40,6 @@ const wipe = document.querySelector("[data-wipe]");
 const viewer = document.querySelector("[data-viewer]");
 const story = document.querySelector(".story");
 const luckyButton = document.querySelector("[data-lucky]");
-const fullscreenButton = document.querySelector("[data-fullscreen]");
 const secretButton = document.querySelector("[data-secret]");
 const secretCard = document.querySelector("[data-secret-card]");
 const secretTitle = document.querySelector("[data-secret-title]");
@@ -219,36 +218,6 @@ function toggleImmersive() {
   showToast(immersiveOn ? "沉浸看图开启，轻点照片可恢复。" : "小按钮回来了。");
 }
 
-async function toggleFullscreen() {
-  try {
-    if (!document.fullscreenElement) {
-      const target = document.documentElement;
-      const request = target.requestFullscreen || target.webkitRequestFullscreen || target.msRequestFullscreen;
-      if (!request) throw new Error("Fullscreen API is unavailable");
-      await request.call(target);
-      fullscreenButton.classList.add("is-on");
-      fullscreenButton.textContent = "退";
-      fullscreenButton.setAttribute("aria-label", "退出全屏");
-      showToast("已尝试进入全屏。");
-    } else {
-      const exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-      if (exit) await exit.call(document);
-      fullscreenButton.classList.remove("is-on");
-      fullscreenButton.textContent = "全";
-      fullscreenButton.setAttribute("aria-label", "进入全屏");
-    }
-  } catch (error) {
-    showToast("当前浏览器不允许网页直接全屏，可添加到桌面后打开。");
-  }
-}
-
-function syncFullscreenButton() {
-  const isFull = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
-  fullscreenButton.classList.toggle("is-on", isFull);
-  fullscreenButton.textContent = isFull ? "退" : "全";
-  fullscreenButton.setAttribute("aria-label", isFull ? "退出全屏" : "进入全屏");
-}
-
 function getLuckyIndex() {
   const today = new Date();
   const seed = today.getFullYear() * 372 + (today.getMonth() + 1) * 31 + today.getDate();
@@ -424,7 +393,6 @@ document.querySelectorAll("[data-next]").forEach((button) => {
 document.querySelector("[data-prev]").addEventListener("click", () => showSlide(current - 1, true));
 document.querySelector("[data-autoplay]").addEventListener("click", (event) => toggleAutoplay(event.currentTarget));
 document.querySelector("[data-music]").addEventListener("click", (event) => toggleMusic(event.currentTarget));
-fullscreenButton.addEventListener("click", toggleFullscreen);
 luckyButton.addEventListener("click", () => {
   showSlide(luckyIndex, true);
   showToast(`已跳到今日幸运：${galleryItems[luckyIndex].title}`);
@@ -493,17 +461,7 @@ viewer.addEventListener("touchend", (event) => {
 }, { passive: true });
 
 window.addEventListener("resize", resizeCanvas);
-document.addEventListener("fullscreenchange", syncFullscreenButton);
-document.addEventListener("webkitfullscreenchange", syncFullscreenButton);
 resizeCanvas();
 renderThumbs();
 showSlide(0, false, false);
 setupLuckyPhoto();
-
-if (window.matchMedia("(display-mode: fullscreen)").matches || window.matchMedia("(display-mode: standalone)").matches) {
-  story.classList.add("is-installed");
-}
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js").catch(() => {});
-}
