@@ -82,7 +82,7 @@ button {
 }
 
 .topbar {
-  position: fixed;
+  position: absolute;
   z-index: 12;
   top: max(12px, env(safe-area-inset-top));
   left: 14px;
@@ -245,7 +245,7 @@ button {
 }
 
 .caption {
-  position: fixed;
+  position: absolute;
   z-index: 11;
   left: 14px;
   right: 82px;
@@ -292,7 +292,7 @@ button {
 }
 
 .side-rail {
-  position: fixed;
+  position: absolute;
   z-index: 13;
   right: 12px;
   top: 50%;
@@ -315,7 +315,7 @@ button {
 }
 
 .bottom-dock {
-  position: fixed;
+  position: absolute;
   z-index: 13;
   left: 14px;
   right: 14px;
@@ -352,7 +352,7 @@ button {
 }
 
 .progress {
-  position: fixed;
+  position: absolute;
   z-index: 12;
   left: 16px;
   right: 16px;
@@ -371,7 +371,7 @@ button {
 }
 
 .filmstrip {
-  position: fixed;
+  position: absolute;
   z-index: 12;
   left: 0;
   right: 0;
