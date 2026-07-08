@@ -8,7 +8,31 @@
   <link rel="preload" href="assets/gallery/photo-01.jpg" as="image">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="is-locked">
+  <section class="lock-screen" data-lock-screen aria-label="相册解锁">
+    <div class="lock-card" data-lock-card>
+      <p class="lock-eyebrow">Private album</p>
+      <h1>方景源小朋友专属入口</h1>
+      <p class="lock-hint">请输入手机密码以解锁</p>
+      <form class="lock-form" data-lock-form>
+        <label class="sr-only" for="album-password">手机密码</label>
+        <input
+          id="album-password"
+          data-lock-input
+          type="password"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="6"
+          autocomplete="one-time-code"
+          placeholder="••••••"
+          aria-describedby="lock-message"
+        >
+        <button type="submit">解锁</button>
+      </form>
+      <p class="lock-message" id="lock-message" data-lock-message>输对暗号，快乐相册才开门。</p>
+    </div>
+  </section>
+
   <main class="app">
     <section class="story" aria-label="方景源小朋友的快乐相册">
       <div class="topbar">
@@ -50,11 +74,11 @@
     <section class="note" aria-label="隐藏留言">
       <p class="eyebrow">Hidden note</p>
       <h2>本相册使用说明</h2>
-      <p>开心的时候多翻几张，不开心的时候也多翻几张。方景源宝宝拥有本页面最高优先级，被哄、被夸、被偏爱都无需排队。</p>
+      <p>开心的时候多翻几张，不开心的时候也多翻几张。方景源小朋友拥有本页面最高优先级，被哄、被夸、被偏爱都无需排队。</p>
       <div class="badges">
-        <span>本卡最终解释权归方景源宝宝所有</span>
+        <span>本卡最终解释权归方景源所有</span>
         <span>不许偷偷皱眉太久</span>
-        <span>被宠有效期无限噢</span>
+        <span>想被哄就点下一张</span>
       </div>
     </section>
   </main>

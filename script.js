@@ -44,8 +44,17 @@ const secretButton = document.querySelector("[data-secret]");
 const secretCard = document.querySelector("[data-secret-card]");
 const secretTitle = document.querySelector("[data-secret-title]");
 const secretText = document.querySelector("[data-secret-text]");
+const lockScreen = document.querySelector("[data-lock-screen]");
+const lockCard = document.querySelector("[data-lock-card]");
+const lockForm = document.querySelector("[data-lock-form]");
+const lockInput = document.querySelector("[data-lock-input]");
+const lockMessage = document.querySelector("[data-lock-message]");
 const canvas = document.querySelector("#confetti");
 const ctx = canvas.getContext("2d");
+
+const LOCK_HASH = "76d55b0f0476a842ce3626918a16a091d27b5a9bc629c3b045b4dcc57c829d64";
+const LOCK_SESSION_KEY = "fang_album_unlocked_this_time";
+const LOCK_FALLBACK = String.fromCharCode(49, 48, 49, 54, 48, 48);
 
 const sweetLines = [
   "今日甜话：方景源小朋友，允许你今天多可爱一点。",
@@ -56,7 +65,7 @@ const sweetLines = [
 ];
 
 const secretLines = [
-  "这张小心心只允许方景源小朋友本人签收，别人看了也只能羡慕。这张小心心只允许方景源小朋友本人签收，别人看了也只能羡慕。",
+  "这张小心心只允许方景源小朋友本人签收，别人看了也只能羡慕。",
   "和你一起坐车的时候，目的地会变重要，但旁边是谁更重要。",
   "车厢里人来人往，可这一小块画面只属于我们。",
   "隔着屏幕也要亲亲，幼稚一点没关系，反正是给你的。",
@@ -110,6 +119,72 @@ let luckyIndex = 0;
 
 function pad(number) {
   return String(number).padStart(2, "0");
+}
+
+async function digestText(value) {
+  if (window.crypto && window.crypto.subtle && typeof TextEncoder !== "undefined") {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+  }
+
+  return "";
+}
+
+function isUnlockedThisSession() {
+  try {
+    return sessionStorage.getItem(LOCK_SESSION_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+}
+
+function rememberUnlock() {
+  try {
+    sessionStorage.setItem(LOCK_SESSION_KEY, "1");
+  } catch (error) {
+    // Some in-app browsers block storage; unlocking still works for this page load.
+  }
+}
+
+function setLockMessage(message, isError = false) {
+  lockMessage.textContent = message;
+  lockMessage.classList.toggle("is-error", isError);
+}
+
+function unlockAlbum(shouldRemember = true) {
+  if (shouldRemember) rememberUnlock();
+  document.body.classList.remove("is-locked");
+  lockScreen.setAttribute("aria-hidden", "true");
+  window.setTimeout(() => {
+    lockScreen.hidden = true;
+  }, 360);
+  resizeCanvas();
+}
+
+function shakeLockCard() {
+  lockCard.classList.remove("is-shaking");
+  void lockCard.offsetWidth;
+  lockCard.classList.add("is-shaking");
+}
+
+async function handleUnlock(event) {
+  event.preventDefault();
+  const value = lockInput.value.replace(/\s+/g, "");
+  const digest = await digestText(value);
+  const isCorrect = digest ? digest === LOCK_HASH : value === LOCK_FALLBACK;
+
+  if (isCorrect) {
+    setLockMessage("解锁成功，快乐相册正在开门。");
+    unlockAlbum();
+    showToast("欢迎进入方景源小朋友的快乐相册。");
+    return;
+  }
+
+  setLockMessage("还能是谁的手机密码呢？", true);
+  lockInput.select();
+  shakeLockCard();
+  if (navigator.vibrate) navigator.vibrate([24, 40, 24]);
 }
 
 function renderThumbs() {
@@ -402,6 +477,10 @@ secretButton.addEventListener("click", () => {
   popHearts();
 });
 secretCard.addEventListener("click", hideSecret);
+lockForm.addEventListener("submit", handleUnlock);
+lockInput.addEventListener("input", () => {
+  setLockMessage("输对暗号，快乐相册才开门。");
+});
 
 photo.draggable = false;
 
@@ -473,3 +552,9 @@ resizeCanvas();
 renderThumbs();
 showSlide(0, false, false);
 setupLuckyPhoto();
+
+if (isUnlockedThisSession()) {
+  unlockAlbum(false);
+} else {
+  window.setTimeout(() => lockInput.focus(), 360);
+}
